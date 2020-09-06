@@ -1,10 +1,8 @@
 import {LitElement, html, customElement, property, css} from 'lit-element';
 
 /**
- * An example element.
+ * Planet item.
  *
- * @slot - This element has a slot
- * @csspart button - The button
  */
 @customElement('sw-planet-item')
 export class PlanetItem extends LitElement {
@@ -18,23 +16,20 @@ export class PlanetItem extends LitElement {
   `;
 
   /**
-   * The name to say "Hello" to.
+   * Planet Object.
    */
-  @property()
-  name = 'World';
+  @property({type: Object})
+  planet = {};
 
   /**
-   * The number of times the button has been clicked.
+   * Planet Index.
    */
   @property({type: Number})
-  count = 0;
+  key = 0;
 
   render() {
-    return html` <div>Planet X</div> `;
-  }
-
-  foo(): string {
-    return 'foo';
+    console.log(this.key, this.planet);
+    return html` <div>Planet ${this.planet.name}</div> `;
   }
 }
 

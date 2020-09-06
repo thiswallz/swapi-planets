@@ -1,12 +1,14 @@
-import {LitElement, html, customElement, css} from 'lit-element';
+import {LitElement, html, customElement, css, property} from 'lit-element';
 import {until} from 'lit-html/directives/until.js';
+import env from '../../../environments/env.js';
 import '../item/planet-item.js';
 
 /**
  *  Planet list element.
  *
- * @slot - This element has a slot
- * @csspart button - The button
+ * @element - sw-planet-list
+ * @csspart container
+ * @todo i18n, dark/light mode, loading custom properties
  */
 @customElement('sw-planet-list')
 export class PlanetList extends LitElement {
@@ -19,22 +21,25 @@ export class PlanetList extends LitElement {
     }
   `;
 
+  /**
+   * Loading text.
+   */
+  @property({type: String, attribute: 'loading-text'})
+  loadingText = 'Loading...';
+
   render() {
-    const planets = fetch('https://swapi.dev/api/planets/').then((r) =>
-      r.json()
-    );
-    console.info(planets);
+    const planets = fetch(`${env.SWAPI}/planets/`).then((r) => r.json());
     return html`${until(
       planets.then((response: IPlanetResult) =>
         response.results.map(
           (planet, i) =>
             html`<sw-planet-item
-              planet="${planet}"
+              planet="${JSON.stringify(planet)}"
               key="${i}"
             ></sw-planet-item>`
         )
       ),
-      html`<span>Loading...</span>`
+      html`<span>${this.loadingText}</span>`
     )}`;
   }
 }

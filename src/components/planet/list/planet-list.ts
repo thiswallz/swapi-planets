@@ -22,14 +22,21 @@ import '../item/planet-item.js';
 export class PlanetList extends LitElement {
   static styles = css`
     :host {
-      display: block;
       width: 100%;
+      display: grid;
+      grid-template-columns: repeat(auto-fit, minmax(200px, 300px));
+      grid-template-rows: 200px;
+      gap: 20px;
+      transition: all 1s ease 0s;
     }
     .navigation {
-      fill: white;
+      fill: hsl(0deg 0% 100% / 77%);
     }
     .navigation a {
       cursor: pointer;
+    }
+    .navigation a:hover:not(.navigation--disabled) {
+      fill: hsl(0deg 0% 100% / 97%);
     }
     a.navigation--disabled {
       fill: gray;
@@ -41,6 +48,17 @@ export class PlanetList extends LitElement {
       background: var(--bg-dark);
       margin: 10px;
       padding: 10px;
+      box-sizing: border-box;
+    }
+    .navigation__next {
+      position: fixed;
+      right: 10px;
+      bottom: 10px;
+    }
+    .navigation__previous {
+      position: fixed;
+      left: 10px;
+      bottom: 10px;
     }
   `;
 
@@ -98,7 +116,24 @@ export class PlanetList extends LitElement {
   }
 
   loadPlanets(url: string): Promise<IPlanetResult> {
-    return fetch(url).then((r) => r.json());
+    this.dispatchEvent(
+      new CustomEvent('loading', {
+        detail: {
+          status: true,
+        },
+      })
+    );
+    return fetch(url)
+      .then((r) => r.json())
+      .finally(() => {
+        this.dispatchEvent(
+          new CustomEvent('loading', {
+            detail: {
+              status: false,
+            },
+          })
+        );
+      });
   }
 
   render() {

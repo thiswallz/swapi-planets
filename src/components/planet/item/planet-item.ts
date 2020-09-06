@@ -11,6 +11,12 @@ export class PlanetItem extends LitElement {
   static styles = css`
     :host {
       display: block;
+      width: 100%;
+    }
+    .planet-container {
+      display: grid;
+      justify-items: center;
+      grid-gap: 15px;
     }
   `;
 
@@ -31,9 +37,8 @@ export class PlanetItem extends LitElement {
       const circleStyle = planetStyle(this.planet);
 
       return html`
-        <div>
-          ${circleSVG(circleStyle, 50)} Planet ${this.planet.name},
-          ${this.planet.climate}
+        <div class="planet-container">
+          ${circleSVG(circleStyle, 120)} Planet ${this.planet.name}
         </div>
       `;
     } else {

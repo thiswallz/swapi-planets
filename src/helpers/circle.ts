@@ -17,9 +17,9 @@ export const circleSVG = (
   }
   return html`<div class="circle-container">
     <svg
-      height="${circle.size}"
+      height="${circle.size}%"
       viewBox="0 0 ${circle.size} ${circle.size}"
-      width="${circle.size}"
+      width="${circle.size}%"
       style="animation: spin ${circle.rotation}s linear infinite;"
     >
       <pattern

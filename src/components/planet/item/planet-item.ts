@@ -2,7 +2,7 @@ import {LitElement, html, customElement, property, css} from 'lit-element';
 import {circleSVG} from '../../../helpers/circle';
 import {planetStyle} from '../../../helpers/planet-colors';
 
-const PLANET_SIZE = 200;
+const PLANET_SIZE = 100;
 /**
  * Planet item.
  *
@@ -24,6 +24,8 @@ export class PlanetItem extends LitElement {
       display: grid;
       justify-items: center;
       grid-gap: 15px;
+      height: 100%;
+      grid-template-rows: 1fr 20px 20px;
     }
     .planet-container svg {
       animation: spin 20s linear infinite;
@@ -56,7 +58,8 @@ export class PlanetItem extends LitElement {
 
       return html`
         <div class="planet-container">
-          ${circleSVG(circle, surfaceWaterCircle)} Planet ${this.planet.name}
+          ${circleSVG(circle, surfaceWaterCircle)}
+          <div>Planet ${this.planet.name}</div>
           <small>${this.planet.climate}</small>
         </div>
       `;

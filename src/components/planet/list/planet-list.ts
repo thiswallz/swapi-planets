@@ -23,15 +23,24 @@ export class PlanetList extends LitElement {
   static styles = css`
     :host {
       display: block;
-      border: solid 1px gray;
-      padding: 16px;
-      max-width: 800px;
+      width: 100%;
     }
     .navigation {
       fill: white;
     }
-    .navigation--disabled {
+    .navigation a {
+      cursor: pointer;
+    }
+    a.navigation--disabled {
       fill: gray;
+      cursor: default;
+    }
+    sw-planet-item {
+      border-radius: 6px;
+      border: 2px dashed var(--subtle-yellow);
+      background: var(--bg-dark);
+      margin: 10px;
+      padding: 10px;
     }
   `;
 
@@ -89,7 +98,6 @@ export class PlanetList extends LitElement {
   }
 
   loadPlanets(url: string): Promise<IPlanetResult> {
-    console.log(url);
     return fetch(url).then((r) => r.json());
   }
 

@@ -1,4 +1,6 @@
 import {LitElement, html, customElement, property, css} from 'lit-element';
+import {circleSVG} from '../../../helpers/circle';
+import {planetStyle} from '../../../helpers/planet-colors';
 
 /**
  * Planet item.
@@ -9,9 +11,6 @@ export class PlanetItem extends LitElement {
   static styles = css`
     :host {
       display: block;
-      border: solid 1px gray;
-      padding: 16px;
-      max-width: 800px;
     }
   `;
 
@@ -29,7 +28,14 @@ export class PlanetItem extends LitElement {
 
   render() {
     if (this.planet) {
-      return html` <div>Planet ${this.planet.name}</div> `;
+      const circleStyle = planetStyle(this.planet);
+
+      return html`
+        <div>
+          ${circleSVG(circleStyle, 50)} Planet ${this.planet.name},
+          ${this.planet.climate}
+        </div>
+      `;
     } else {
       return html` <div>Planet not found</div> `;
     }

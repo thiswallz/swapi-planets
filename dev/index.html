@@ -18,15 +18,36 @@
       body {
         font-family: 'Roboto', sans-serif;
         font-size: 18px;
-        background: #263238;
+        background: #222831;
         color: white;
       }
-      sw-planet-list h1 {
-        background: red;
+      h1.title-sw {
+        border-left: 4px solid var(--yellow);
+        padding-left: 0.8em;
+        margin-left: 0.5em;
+        text-align: justify;
+        font-size-adjust: 1rem;
+      }
+      .logo img {
+        width: 150px;
+        position: absolute;
+        right: 1.3em;
+        top: 0.8em;
+      }
+      :root {
+        --subtle-yellow: rgba(236, 198, 48, 0.3);
+        --bg-dark: #1a1d24;
+        --yellow: #fae042;
       }
     </style>
   </head>
   <body>
+    <h1 class="title-sw">Starwars Planets:</h1>
+    <div class="logo">
+      <img
+        src="https://logos-download.com/wp-content/uploads/2016/09/Star_Wars_logo-1.png"
+      />
+    </div>
     <sw-planet-list loading-text="Waiting...">
       <sw-planet-item></sw-planet-item>
     </sw-planet-list>

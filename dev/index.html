@@ -38,11 +38,13 @@
         text-align: justify;
         font-size-adjust: 1rem;
       }
-      .logo img {
-        width: 150px;
+      .logo {
         position: absolute;
         right: 1.3em;
         top: 0.8em;
+      }
+      .logo img {
+        width: 150px;
       }
       :root {
         --subtle-yellow: rgba(236, 198, 48, 0.3);
@@ -117,6 +119,14 @@
         transform: translateY(-50%);
         left: calc(50% - 90px);
       }
+      .zoom {
+        position: absolute;
+        left: -200px;
+        top: 20px;
+      }
+      .zoom input {
+        width: 180px;
+      }
     </style>
   </head>
   <body>
@@ -128,6 +138,16 @@
       <img
         src="https://logos-download.com/wp-content/uploads/2016/09/Star_Wars_logo-1.png"
       />
+      <div class="zoom">
+        <input
+          type="range"
+          name="zoom"
+          min="0.1"
+          max="2.8"
+          step=".1"
+          value="1"
+        />
+      </div>
     </div>
     <sw-planet-list loading-text="Waiting...">
       <sw-planet-item></sw-planet-item>
@@ -136,6 +156,11 @@
       // Just to demostrate interaction, we could sue angular, reac, etc
       const planets = document.querySelector('sw-planet-list');
       const loader = document.querySelector('.loader');
+      const zoom = document.querySelector('input[name=zoom]');
+      zoom.addEventListener('change', (e) => {
+        console.log(e.target.value);
+        document.querySelector('sw-planet-list').style.zoom = e.target.value;
+      });
       planets.addEventListener('loading', (e) => {
         if (e.detail.status) {
           loader.classList.add('loader--active');

@@ -24,7 +24,7 @@ export class PlanetList extends LitElement {
     :host {
       width: 100%;
       display: grid;
-      grid-template-columns: repeat(auto-fit, minmax(300px, 400px));
+      grid-template-columns: repeat(auto-fit, minmax(250px, 350px));
       gap: 20px;
       transition: all 1s ease 0s;
       justify-content: center;

@@ -1,0 +1,39 @@
+<!DOCTYPE html>
+
+<html>
+  <head>
+    <meta charset="utf-8" />
+    <title>Planets - Web components</title>
+    <link
+      href="http://fonts.googleapis.com/css?family=Roboto"
+      rel="stylesheet"
+      type="text/css"
+    />
+    <script
+      type="module"
+      src="../dist/components/planet/list/planet-list.js"
+    ></script>
+    <script
+      type="module"
+      src="../dist/components/planet/item/planet-item.js"
+    ></script>
+    <style>
+      body {
+        font-family: 'Roboto', sans-serif;
+        font-size: 18px;
+        background: #263238;
+        color: white;
+      }
+      sw-planet-list h1 {
+        background: red;
+      }
+    </style>
+  </head>
+  <body>
+    <sw-planet-list>
+      <sw-planet-item></sw-planet-item>
+      <sw-planet-item></sw-planet-item>
+      <sw-planet-item></sw-planet-item>
+    </sw-planet-list>
+  </body>
+</html>

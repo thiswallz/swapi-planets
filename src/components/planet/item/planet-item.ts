@@ -19,7 +19,7 @@ export class PlanetItem extends LitElement {
    * Planet Object.
    */
   @property({type: Object})
-  planet = {};
+  planet: IPlanet | null = null;
 
   /**
    * Planet Index.
@@ -28,8 +28,11 @@ export class PlanetItem extends LitElement {
   key = 0;
 
   render() {
-    console.log(this.key, this.planet);
-    return html` <div>Planet ${this.planet.name}</div> `;
+    if (this.planet) {
+      return html` <div>Planet ${this.planet.name}</div> `;
+    } else {
+      return html` <div>Planet not found</div> `;
+    }
   }
 }
 

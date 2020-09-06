@@ -1,5 +1,13 @@
-import {LitElement, html, customElement, css, property} from 'lit-element';
+import {
+  LitElement,
+  html,
+  customElement,
+  css,
+  property,
+  TemplateResult,
+} from 'lit-element';
 import {until} from 'lit-html/directives/until.js';
+import {iconLeft, iconRight} from '../../../assets/icons/navigation.js';
 import env from '../../../environments/env.js';
 import '../item/planet-item.js';
 
@@ -19,6 +27,12 @@ export class PlanetList extends LitElement {
       padding: 16px;
       max-width: 800px;
     }
+    .navigation {
+      fill: white;
+    }
+    .navigation--disabled {
+      fill: gray;
+    }
   `;
 
   /**
@@ -27,17 +41,63 @@ export class PlanetList extends LitElement {
   @property({type: String, attribute: 'loading-text'})
   loadingText = 'Loading...';
 
+  @property({type: Object})
+  planets: Promise<IPlanetResult>;
+
+  constructor() {
+    super();
+    this.planets = this.loadPlanets(`${env.SWAPI}/planets/`);
+  }
+
+  navigationHandler(url: string | null) {
+    if (!url) {
+      return;
+    }
+    this.planets = this.loadPlanets(url);
+  }
+
+  renderNavigationArrow(url: string | null, icon: TemplateResult) {
+    return html`<a
+      class="${url ? '' : 'navigation--disabled'}"
+      @click="${() => {
+        this.navigationHandler(url);
+      }}"
+    >
+      ${icon}
+    </a>`;
+  }
+
+  renderNavigation({previous, next}: IPlanetResult) {
+    return html` <div class="navigation">
+      <div class="navigation__previous">
+        ${this.renderNavigationArrow(previous, iconLeft)}
+      </div>
+      <div class="navigation__next">
+        ${this.renderNavigationArrow(next, iconRight)}
+      </div>
+    </div>`;
+  }
+
+  renderList(response: IPlanetResult) {
+    return response.results.map(
+      (planet, i) =>
+        html`<sw-planet-item
+          planet="${JSON.stringify(planet)}"
+          key="${i}"
+        ></sw-planet-item>`
+    );
+  }
+
+  loadPlanets(url: string): Promise<IPlanetResult> {
+    console.log(url);
+    return fetch(url).then((r) => r.json());
+  }
+
   render() {
-    const planets = fetch(`${env.SWAPI}/planets/`).then((r) => r.json());
     return html`${until(
-      planets.then((response: IPlanetResult) =>
-        response.results.map(
-          (planet, i) =>
-            html`<sw-planet-item
-              planet="${JSON.stringify(planet)}"
-              key="${i}"
-            ></sw-planet-item>`
-        )
+      this.planets.then(
+        (response: IPlanetResult) =>
+          html`${this.renderList(response)} ${this.renderNavigation(response)}`
       ),
       html`<span>${this.loadingText}</span>`
     )}`;

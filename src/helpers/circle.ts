@@ -15,7 +15,6 @@ export const circleSVG = (
   if (!circle.size) {
     return html`<svg></svg>`;
   }
-  console.log(innerCircle?.size);
   return html`<div class="circle-container">
     <svg
       height="${circle.size}"

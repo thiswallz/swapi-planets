@@ -8,7 +8,7 @@ export const planetStyle = ({climate}: IPlanet): Partial<ICircleStyleSVG> => {
   } else if (climate.includes('arid')) {
     return {stroke: '#D7CCC8', strokeWidth: 3, fill: '#BCAAA4'};
   } else if (climate.includes('temperate')) {
-    return {stroke: '#81C784', strokeWidth: 3, fill: '#00695C'};
+    return {stroke: '#81C784', strokeWidth: 3, fill: '#388E3C'};
   } else if (climate.includes('murky')) {
     return {stroke: '#607D8B', strokeWidth: 3, fill: '#37474F'};
   } else if (climate.includes('tropical')) {

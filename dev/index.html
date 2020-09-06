@@ -20,6 +20,16 @@
         font-size: 18px;
         background: #222831;
         color: white;
+        background: url(https://cssanimation.rocks/images/random/space2.jpg)
+          repeat center;
+        background-size: cover;
+        content: '';
+        opacity: 0.8;
+        position: absolute;
+        left: 0;
+        right: 0;
+        top: 0;
+        bottom: 0;
       }
       h1.title-sw {
         border-left: 4px solid var(--yellow);
@@ -37,6 +47,9 @@
       :root {
         --subtle-yellow: rgba(236, 198, 48, 0.3);
         --bg-dark: #1a1d24;
+        --bg-dark-hover: #32394a;
+        --bg-dark-light: rgb(204 204 204 / 30%);
+        --bg-dark-highlighted: rgb(204 204 204 / 80%);
         --bg-dark-loading: #1a1d24b4;
         --yellow: #fae042;
       }
@@ -124,7 +137,6 @@
       const planets = document.querySelector('sw-planet-list');
       const loader = document.querySelector('.loader');
       planets.addEventListener('loading', (e) => {
-        console.log(e.detail.status);
         if (e.detail.status) {
           loader.classList.add('loader--active');
         } else {

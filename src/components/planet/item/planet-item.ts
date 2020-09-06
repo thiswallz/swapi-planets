@@ -57,6 +57,7 @@ export class PlanetItem extends LitElement {
       return html`
         <div class="planet-container">
           ${circleSVG(circle, surfaceWaterCircle)} Planet ${this.planet.name}
+          <small>${this.planet.climate}</small>
         </div>
       `;
     } else {

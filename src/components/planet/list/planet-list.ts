@@ -27,6 +27,7 @@ export class PlanetList extends LitElement {
       grid-template-columns: repeat(auto-fit, minmax(300px, 400px));
       gap: 20px;
       transition: all 1s ease 0s;
+      justify-content: center;
     }
     .navigation {
       fill: hsl(0deg 0% 100% / 77%);
@@ -43,11 +44,15 @@ export class PlanetList extends LitElement {
     }
     sw-planet-item {
       border-radius: 6px;
-      border: 2px dashed var(--subtle-yellow);
+      border: 2px dashed var(--bg-dark-light);
       background: var(--bg-dark);
       margin: 10px;
       padding: 10px;
       box-sizing: border-box;
+    }
+    sw-planet-item:hover {
+      background: var(--bg-dark-hover);
+      border: 2px solid var(--bg-dark-highlighted);
     }
     .navigation__next {
       position: fixed;
@@ -72,7 +77,7 @@ export class PlanetList extends LitElement {
 
   constructor() {
     super();
-    this.planets = this.loadPlanets(`${env.SWAPI}/planets/`);
+    this.planets = this.loadPlanets(`${env.SWAPI}/planets/?page=2`);
   }
 
   navigationHandler(url: string | null) {

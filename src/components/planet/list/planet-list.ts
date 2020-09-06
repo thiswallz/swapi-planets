@@ -1,7 +1,9 @@
-import {LitElement, html, customElement, property, css} from 'lit-element';
+import {LitElement, html, customElement, css} from 'lit-element';
+import {until} from 'lit-html/directives/until.js';
+import '../item/planet-item.js';
 
 /**
- * An example element.
+ *  Planet list element.
  *
  * @slot - This element has a slot
  * @csspart button - The button
@@ -17,34 +19,23 @@ export class PlanetList extends LitElement {
     }
   `;
 
-  /**
-   * The name to say "Hello" to.
-   */
-  @property()
-  name = 'World';
-
-  /**
-   * The number of times the button has been clicked.
-   */
-  @property({type: Number})
-  count = 0;
-
   render() {
-    return html`
-      <h1>Hello, ${this.name}!</h1>
-      <button @click=${this._onClick} part="button">
-        Click it Count: ${this.count}
-      </button>
-      <slot></slot>
-    `;
-  }
-
-  private _onClick() {
-    this.count++;
-  }
-
-  foo(): string {
-    return 'foo';
+    const planets = fetch('https://swapi.dev/api/planets/').then((r) =>
+      r.json()
+    );
+    console.info(planets);
+    return html`${until(
+      planets.then((response: IPlanetResult) =>
+        response.results.map(
+          (planet, i) =>
+            html`<sw-planet-item
+              planet="${planet}"
+              key="${i}"
+            ></sw-planet-item>`
+        )
+      ),
+      html`<span>Loading...</span>`
+    )}`;
   }
 }
 

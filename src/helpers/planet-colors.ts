@@ -1,6 +1,6 @@
 import {ICircleStyleSVG} from './circle';
 
-export const planetStyle = ({climate}: IPlanet): ICircleStyleSVG => {
+export const planetStyle = ({climate}: IPlanet): Partial<ICircleStyleSVG> => {
   if (climate.includes('frozen')) {
     return {stroke: '#00BCD4', strokeWidth: 2, fill: '#0D47A1'};
   } else if (climate.includes('arid')) {

@@ -2,6 +2,7 @@ import {LitElement, html, customElement, property, css} from 'lit-element';
 import {circleSVG} from '../../../helpers/circle';
 import {planetStyle} from '../../../helpers/planet-colors';
 
+const PLANET_SIZE = 120;
 /**
  * Planet item.
  *
@@ -9,6 +10,12 @@ import {planetStyle} from '../../../helpers/planet-colors';
 @customElement('sw-planet-item')
 export class PlanetItem extends LitElement {
   static styles = css`
+    @keyframes spin {
+      to {
+        transform: rotateZ(360deg);
+      }
+    }
+
     :host {
       display: block;
       width: 100%;
@@ -17,6 +24,9 @@ export class PlanetItem extends LitElement {
       display: grid;
       justify-items: center;
       grid-gap: 15px;
+    }
+    .planet-container svg {
+      animation: spin 20s linear infinite;
     }
   `;
 
@@ -34,11 +44,20 @@ export class PlanetItem extends LitElement {
 
   render() {
     if (this.planet) {
-      const circleStyle = planetStyle(this.planet);
+      const circle = {
+        size: PLANET_SIZE,
+        rotation: this.planet.rotation_period,
+        ...planetStyle(this.planet),
+      };
+      console.log(this.planet.surface_water);
+      const surfaceWaterCircle = {
+        size: PLANET_SIZE * (~~this.planet.surface_water / 100),
+        fill: '#03A9F4',
+      };
 
       return html`
         <div class="planet-container">
-          ${circleSVG(circleStyle, 120)} Planet ${this.planet.name}
+          ${circleSVG(circle, surfaceWaterCircle)} Planet ${this.planet.name}
         </div>
       `;
     } else {

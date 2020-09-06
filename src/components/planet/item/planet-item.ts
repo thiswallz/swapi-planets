@@ -2,7 +2,7 @@ import {LitElement, html, customElement, property, css} from 'lit-element';
 import {circleSVG} from '../../../helpers/circle';
 import {planetStyle} from '../../../helpers/planet-colors';
 
-const PLANET_SIZE = 120;
+const PLANET_SIZE = 200;
 /**
  * Planet item.
  *
@@ -49,7 +49,6 @@ export class PlanetItem extends LitElement {
         rotation: this.planet.rotation_period,
         ...planetStyle(this.planet),
       };
-      console.log(this.planet.surface_water);
       const surfaceWaterCircle = {
         size: PLANET_SIZE * (~~this.planet.surface_water / 100),
         fill: '#03A9F4',

@@ -7,6 +7,8 @@ Star wars planets using LIT Element (web components library), there is a list of
 Install dependencies:
 
 ```bash
+git clone https://github.com/thiswallz/swapi-planets.git
+cd swapi-planets
 npm i
 ```
 

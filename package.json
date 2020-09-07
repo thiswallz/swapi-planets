@@ -2,8 +2,8 @@
   "name": "swplanewts-planets",
   "version": "0.0.1",
   "description": "Web for the API SWAPI - Planets",
-  "main": "my-element.js",
-  "module": "my-element.js",
+  "main": "dist/components/planet/list/planet-list.js",
+  "module": "dist/components/planet/list/planet-list.js",
   "scripts": {
     "build": "tsc",
     "build:watch": "tsc --watch",

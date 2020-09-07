@@ -44,7 +44,6 @@
       const loader = document.querySelector('.loader');
       const zoom = document.querySelector('input[name=zoom]');
       zoom.addEventListener('change', (e) => {
-        console.log(e.target.value);
         document.querySelector('sw-planet-list').style.zoom = e.target.value;
       });
       planets.addEventListener('loading', (e) => {

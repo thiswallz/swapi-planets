@@ -1,10 +1,13 @@
 import {html} from 'lit-element';
 
-export const panelInfoPlanet = (planet: IPlanet, background: string) => {
+export const panelInfoPlanet = (
+  planet: IPlanet,
+  background: string | undefined
+) => {
   return html`
     <div
       class="info-planet"
-      style="background:${background};filter: invert(1);color:black"
+      style="background:${background || '#fff'};filter: invert(1);color:black"
     >
       <div class="info-planet__key">Diameter</div>
       <div class="info-planet__value">${planet.diameter}</div>

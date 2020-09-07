@@ -80,7 +80,7 @@ export class PlanetItem extends LitElement {
   }
 
   @eventOptions({passive: true})
-  private _handleMouseOut(e: any) {
+  private _handleMouseOut() {
     this.showInfo = false;
   }
 
@@ -100,13 +100,15 @@ export class PlanetItem extends LitElement {
       return html`
         <div
           @mouseenter=${debounce(() => this._handleMouseEnter(), 50)}
-          @mouseleave=${debounce((e: any) => this._handleMouseOut(e), 50)}
+          @mouseleave=${debounce(() => this._handleMouseOut(), 50)}
           class="planet-container"
         >
           ${circleSVG(circle, [surfaceWaterCircle])}
           <div>Planet ${this.planet.name}</div>
           <small>${this.planet.climate}</small>
-          ${this.showInfo ? panelInfoPlanet(this.planet, circleStyle.fill) : ''}
+          ${this.showInfo
+            ? panelInfoPlanet(this.planet, circleStyle?.fill)
+            : ''}
         </div>
       `;
     } else {
